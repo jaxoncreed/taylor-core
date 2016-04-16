@@ -11,9 +11,10 @@ export default class weather {
 		this._interval = setInterval(() => {
 			YQL('SELECT * FROM weather.forecast WHERE woeid = 2357024')
 				.exec((err, resp) => {
-					const formattedResp = this._formatData(resp.query.results.channel)
-
-					this.updateState(formattedResp)
+					if (resp && resp.query && resp.query.results && resp.query.channel) {
+						const formattedResp = this._formatData(resp.query.results.channel);
+						this.updateState(formattedResp);
+					}
 				})
 		}, 10000);
 	}

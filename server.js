@@ -2,13 +2,6 @@ import Server from 'socket.io';
 import deviceFactory from './core/deviceTypes/deviceFactory'
 
 
-
-
-
-// Test
-import express from 'express'
-var app = express();
-
 export default function startServer(deviceStore) {
 	const socketPort = 8010;
 
@@ -30,15 +23,11 @@ export default function startServer(deviceStore) {
 	    });
 	});
 
-
-
-
-	// Test eclipse server:
-	app.get('/', (req, res) => {
-		var dev = deviceStore.getDeviceById('12345');
-		console.log(dev);
-		res.send('yo!');
-	});
-	app.listen(9000);
+	setInterval(() => {
+		deviceStore.devices.forEach((device) => {
+			console.log(device.id);
+			console.log(JSON.stringify(device.state));
+		});
+	}, 1000);
 
 }
