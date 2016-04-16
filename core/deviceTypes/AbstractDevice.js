@@ -11,7 +11,7 @@ export default class AbstractDevice {
 	setState(newState) {
 		Object.assign(this.state, newState);
 		this.handlers.forEach((handler) => {
-			handler(newState, deviceStore);
+			handler(newState, this.deviceStore);
 		});
 	}
 
