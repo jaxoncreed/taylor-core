@@ -9,12 +9,15 @@ export default function startServer(store) {
 
 	io.on('connection', (socket) => {
 	    var device;
-	    socket.on('config', (config) =>
+	    socket.on('config', (config) => {
 	    	device = deviceFactory(config);
-	    	device.subscribeHandler((state) =>
+	    	device.subscribeHandler((state) => {
 	    		socket.emit('state', state);
-	    	);
-	    );
+	    	});
+
+	    	console.log(device.state);
+	    	console.log(device.handlers);
+	    });
 
 	    socket.on('update', (updatedState) => {
 	    	device.setState(updatedState);
