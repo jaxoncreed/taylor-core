@@ -11,13 +11,13 @@
 export default function messengerHandler(newState, deviceStore) {
 	console.log(newState);
 	const newMessage = newState.messages[newState.length - 1]
-	if (newMessage.intent === 'equation') {
-		var unknown = deviceStore.identities[newMessage.entities[0]];
-		var known = deviceStore.identities[newMessage.entities[0]];
-		if (!deviceStore.identities[newMessage.entities[1]]) {
-			unknown = newMessage.entities[0];
-			known = newMessage.enttities[1]
+	if (newMessage.intent === 'MAP_SOURCE_TO_DESTINATION') {
+		const dest = deviceStore.identities[newMessage.data.destination + " " + newMessage.data.number];
+		if (!dest) {
+			// Error, the destination is not recognized
 		}
-		deviceStore.identities[unknown] = known;
+		deviceStore.identities[newMessage.data.source] = dest;
+	} else if (newMessage.intent === 'TOGGLE') {
+		deviceStore.setIdentityLocation(newMessage.data.source, newMessage.data.toggle);
 	}
 }

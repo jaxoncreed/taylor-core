@@ -40,5 +40,27 @@ export default class DeviceStore {
 		return matches;
 	}
 
+	getIdentityLocation(name) {
+		const identityLocation = this.identities[name];
+		if (!identityLocation) {
+			// error not found
+		}
+		const device = this.getDeviceById(identityLocation[0]);
+		var data = identityLocation.state;
+		for (var i = 1; i < identityLocation.length; i++) {
+			data = data[identityLocation[i]];
+		}
+		return data;
+	}
 
+	setIdentityLocation(name, data) {
+		const identityLocation = this.identities[name];
+		if (!identityLocation) {
+			// error not found
+		}
+		const device = this.getDeviceById(identityLocation[0]);
+		var update = Object.assign({}, device.state);
+		set(update, identityLocation.splice(1, identityLocation.length), data);
+		device.setState(update);
+	}
 }
