@@ -19,7 +19,7 @@ export default class weather {
 	}
 
 	_formatData(json) {
-		const today = json.item.condition.temp
+		const today = json.item.condition
 		const tomorrow = json.item.forecast ? json.item.forecast : []
 
 		return {
