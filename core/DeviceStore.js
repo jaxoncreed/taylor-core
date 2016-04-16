@@ -2,6 +2,7 @@
 export default class DeviceStore {
 	constructor() {
 		this.devices = [];
+		this.identities = {};
 	}
 
 	addDevice(givenDevice) {
@@ -12,6 +13,7 @@ export default class DeviceStore {
 		}
 		this.devices.push(givenDevice);
 		givenDevice.setDeviceStore(this);
+		Object.assign(this.identities, givenDevice.getIdentities);
 		return givenDevice;
 	}
 
@@ -37,4 +39,6 @@ export default class DeviceStore {
 		});
 		return matches;
 	}
+
+
 }
