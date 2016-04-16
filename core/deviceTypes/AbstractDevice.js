@@ -4,6 +4,7 @@ export default class AbstractDevice {
 		this.id = id;
 		this.state = {};
 		this.handlers = [];
+		this.tags = [];
 		this.deviceStore = null;
 	}
 
@@ -21,5 +22,7 @@ export default class AbstractDevice {
 	setDeviceStore(parent) {
 		this.deviceStore = parent;
 	}
+
+
 
 }

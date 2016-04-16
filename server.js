@@ -1,7 +1,15 @@
 import Server from 'socket.io';
 import deviceFactory from './core/deviceTypes/deviceFactory'
 
-export default function startServer(store) {
+
+
+
+
+// Test
+import express from 'express'
+var app = express();
+
+export default function startServer(deviceStore) {
 	const socketPort = 8010;
 
 	const io = new Server().attach(socketPort);
@@ -14,13 +22,23 @@ export default function startServer(store) {
 	    	device.subscribeHandler((state) => {
 	    		socket.emit('state', state);
 	    	});
-
-	    	console.log(device.state);
-	    	console.log(device.handlers);
+	    	deviceStore.addDevice(device);
 	    });
 
 	    socket.on('update', (updatedState) => {
 	    	device.setState(updatedState);
 	    });
 	});
+
+
+
+
+	// Test eclipse server:
+	app.get('/', (req, res) => {
+		var dev = deviceStore.getDeviceById('12345');
+		console.log(dev);
+		res.send('yo!');
+	});
+	app.listen(9000);
+
 }

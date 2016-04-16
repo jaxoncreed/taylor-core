@@ -1,3 +1,6 @@
 import startServer from "./server.js"
+import DeviceStore from "./core/DeviceStore"
 
-startServer();
+var deviceStore = new DeviceStore();
+
+startServer(deviceStore);
