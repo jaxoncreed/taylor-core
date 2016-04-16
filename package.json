@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
-    "start-device": "babel-node ./devices/weatherExample.js",
+    "start-device": "babel-node ./test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "bluebird": "^3.3.5",
+    "node-fetch": "^1.5.1",
+    "request": "^2.71.0",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
     "yql": "^1.0.2"
